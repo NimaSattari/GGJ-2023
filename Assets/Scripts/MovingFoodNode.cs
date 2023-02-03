@@ -9,17 +9,21 @@ public class MovingFoodNode : Node
     [SerializeField] Transform[] posesToVisit;
     [SerializeField] int nowPos;
     [SerializeField] bool goFromStart = true;
+    [SerializeField] bool isClickedOn = false;
+    [SerializeField] int foodPlus;
 
-    public override void OnClick()
+    public override void OnClick(bool isShort)
     {
-        base.OnClick();
-        //Player.instance.MoveToLocation(transform.position, 1);
+        print("OnClick");
+        base.OnClick(isShort);
+        isClickedOn = true;
+        Player.instance.MoveToLocation(transform.position, 1, isShort);
     }
 
     public override void PlayerCollision()
     {
         base.PlayerCollision();
-        Player.instance.wholeFoodsEaten++;
+        Player.instance.wholeFoodsEaten += foodPlus;
         GameObject emptyInstant = Instantiate(emptyNode, transform.position, Quaternion.identity, transform.parent);
         emptyInstant.GetComponent<Node>().visited = true;
         Destroy(gameObject);
@@ -27,10 +31,18 @@ public class MovingFoodNode : Node
 
     public override void OnPlayerMoved()
     {
+        print("OnMove");
         base.OnPlayerMoved();
-        NextPath();
+        StartCoroutine("enumerator");
     }
-
+    public IEnumerator enumerator()
+    {
+        yield return new WaitForSeconds(0.25f);
+        if (!isClickedOn)
+        {
+            NextPath();
+        }
+    }
     public void NextPath()
     {
         if (goFromStart)

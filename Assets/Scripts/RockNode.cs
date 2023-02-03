@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class RockNode : Node
 {
-    public override void OnClick()
+    public override void OnClick(bool isShort)
     {
-        base.OnClick();
+        base.OnClick(isShort);
     }
 
     public override void PlayerCollision()

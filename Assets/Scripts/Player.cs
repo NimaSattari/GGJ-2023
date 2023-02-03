@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] public static Player instance;
     [SerializeField] public LineRenderer lineRenderer;
+    public AudioSource source;
     public static event Action eventMove;
 
     private int moveNumb;
@@ -15,11 +16,8 @@ public class Player : MonoBehaviour
     public float wholeFoodsEaten;
     public float spentFoods;
     public bool isMoving;
+    public int score;
 
-/*    private int animationStep;
-    private float fps = 30;
-    private float fpsCounter;
-    [SerializeField] Texture[] textures;*/
     private void Start()
     {
         if (Player.instance == null)
@@ -28,31 +26,20 @@ public class Player : MonoBehaviour
         }
     }
 
-    /*        fpsCounter += Time.deltaTime;
-        if (fpsCounter >= 1f / fps)
-        {
-            animationStep++;
-            if (animationStep == textures.Length)
-            {
-                animationStep = 0;
-            }
-            lineRenderer.material.SetTexture("_MainTex", textures[animationStep]);
-            fpsCounter = 0;
-        }*/
-
     private void LateUpdate()
     {
         UIManager.instance.movesText.text = (wholeFoodsEaten - spentFoods).ToString();
+        UIManager.instance.scoreText.text = score.ToString();
+
         if (wholeFoodsEaten - spentFoods <= 0 && !isMoving)
         {
             StartCoroutine(Lose());
         }
     }
 
-    public void MoveToLocation(Vector3 endLocation, int foodWaste)
+    public void MoveToLocation(Vector3 endLocation, int foodWaste, bool isShort)
     {
-        var dis = Vector3.Distance(transform.position, endLocation);
-        if (dis <= 1.1f && wholeFoodsEaten - spentFoods >= foodWaste)
+        if (wholeFoodsEaten - spentFoods >= foodWaste && isShort)
         {
             isMoving = true;
             print("Player Move");
@@ -73,7 +60,7 @@ public class Player : MonoBehaviour
             StartCoroutine(ChangeIsMove());
             eventMove?.Invoke();
         }
-        else if (dis >= 1.2f && dis <= 1.6f && wholeFoodsEaten - spentFoods >= foodWaste*2)
+        else if (wholeFoodsEaten - spentFoods >= foodWaste + 1 && !isShort)
         {
             isMoving = true;
             print("Player Move");
@@ -90,7 +77,7 @@ public class Player : MonoBehaviour
             }
             lineRenderer.SetPosition(moveNumb + 1, endLocation);
             moveNumb++;
-            spentFoods += foodWaste * 2;
+            spentFoods += foodWaste + 1;
             StartCoroutine(ChangeIsMove());
             eventMove?.Invoke();
         }
@@ -110,6 +97,7 @@ public class Player : MonoBehaviour
     {
         print("Win");
         UIManager.instance.winText.SetActive(true);
+        score += (int)(wholeFoodsEaten - spentFoods) * 10;
     }
 
     public IEnumerator Lose()

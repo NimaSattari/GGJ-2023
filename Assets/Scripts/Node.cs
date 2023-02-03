@@ -7,16 +7,23 @@ public abstract class Node : MonoBehaviour
 {
     [SerializeField] CircleCollider2D circle;
     public bool visited;
+    public int scoreToAdd;
+    [SerializeField] AudioClip clip;
 
     private void OnMouseDown()
     {
-        if (!visited)
+        var dis = Vector3.Distance(transform.position, Player.instance.transform.position);
+        if (!visited && dis <= 1.1f)
         {
-            OnClick();
+            OnClick(true);
+        }
+        else if(!visited && dis >= 1.2f && dis <= 1.6f)
+        {
+            OnClick(false);
         }
     }
 
-    public virtual void OnClick()
+    public virtual void OnClick(bool isShort)
     {
 
     }
@@ -30,6 +37,7 @@ public abstract class Node : MonoBehaviour
             {
                 PlayerCollision();
                 visited = true;
+                Player.instance.source.PlayOneShot(clip);
             }
         }
     }
@@ -37,6 +45,7 @@ public abstract class Node : MonoBehaviour
     public virtual void PlayerCollision()
     {
         circle.enabled = false;
+        Player.instance.score += scoreToAdd;
     }
 
     private void OnEnable()
@@ -51,6 +60,6 @@ public abstract class Node : MonoBehaviour
 
     public virtual void OnPlayerMoved()
     {
-        
+
     }
 }

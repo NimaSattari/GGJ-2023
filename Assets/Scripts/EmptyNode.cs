@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EmptyNode : Node
 {
-    public override void OnClick()
+    public override void OnClick(bool isShort)
     {
-        base.OnClick();
-        Player.instance.MoveToLocation(transform.position, 1);
+        base.OnClick(isShort);
+        Player.instance.MoveToLocation(transform.position, 1,isShort);
     }
 
     public override void PlayerCollision()

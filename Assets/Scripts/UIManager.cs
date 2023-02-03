@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public TextMeshProUGUI movesText;
     [SerializeField] public GameObject loseText;
     [SerializeField] public GameObject winText;
+    [SerializeField] public TextMeshProUGUI scoreText;
 
     public void Again()
     {

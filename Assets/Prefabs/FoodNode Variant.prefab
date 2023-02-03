@@ -7,18 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2898818496786717896, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
-      propertyPath: m_Color.b
-      value: 0.4867925
-      objectReference: {fileID: 0}
-    - target: {fileID: 2898818496786717896, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
-      propertyPath: m_Color.g
-      value: 0.4867925
-      objectReference: {fileID: 0}
-    - target: {fileID: 2898818496786717896, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2898818496786717897, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -67,6 +55,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: FoodNode Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3404113028658246449, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3bdfec61bf9ab32459c952f27feb19f0, type: 3}
+    - target: {fileID: 3404113028658246449, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3404113028658246449, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1055905867488727915, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
@@ -94,4 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circle: {fileID: 3388661142870001956}
   visited: 0
+  scoreToAdd: 10
+  clip: {fileID: 0}
   emptyNode: {fileID: 2898818496786717899, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
+  foodPlus: 3
