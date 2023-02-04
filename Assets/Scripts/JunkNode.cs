@@ -5,11 +5,11 @@ using UnityEngine;
 public class JunkNode : Node
 {
     [SerializeField] GameObject emptyNode;
-    [SerializeField] int takenFood;
-    public override void OnClick(bool isShort)
+
+    public override void OnClick(int foodWaste)
     {
-        base.OnClick(isShort);
-        Player.instance.MoveToLocation(transform.position, takenFood,isShort);
+        base.OnClick(foodWaste);
+        Player.instance.MoveToLocation(transform.position, foodWaste);
     }
 
     public override void PlayerCollision()

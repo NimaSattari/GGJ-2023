@@ -12,11 +12,11 @@ public class MovingFoodNode : Node
     [SerializeField] bool isClickedOn = false;
     [SerializeField] int givenFood;
 
-    public override void OnClick(bool isShort)
+    public override void OnClick(int foodWaste)
     {
-        base.OnClick(isShort);
+        base.OnClick(foodWaste);
         isClickedOn = true;
-        Player.instance.MoveToLocation(transform.position, 1, isShort);
+        Player.instance.MoveToLocation(transform.position, foodWaste);
     }
 
     public override void PlayerCollision()

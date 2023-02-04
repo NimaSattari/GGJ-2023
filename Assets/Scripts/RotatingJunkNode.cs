@@ -9,34 +9,33 @@ public class RotatingJunkNode : Node
     [SerializeField] int nowPos;
     [SerializeField] bool isClickedOn = false;
     [SerializeField] GameObject rotatingObject;
-    [SerializeField] int takenFood;
 
-    public override void OnClick(bool isShort)
+    public override void OnClick(int foodWaste)
     {
         print("OnClick");
-        base.OnClick(isShort);
+        base.OnClick(foodWaste);
         float playerY = Player.instance.transform.position.y, playerx = Player.instance.transform.position.x;
         float myX = transform.position.x, myY = transform.position.y;
 
         if (nowPos == 0 && playerY - myY >= 0.9f && playerx - myX <= 0.1f)
         {
             isClickedOn = true;
-            Player.instance.MoveToLocation(transform.position, takenFood, isShort);
+            Player.instance.MoveToLocation(transform.position, foodWaste);
         }
         else if (nowPos == 2 && playerY - myY <= -0.9f && playerx - myX <= 0.1f)
         {
             isClickedOn = true;
-            Player.instance.MoveToLocation(transform.position, takenFood, isShort);
+            Player.instance.MoveToLocation(transform.position, foodWaste);
         }
         else if (nowPos == 3 && playerx - myX >= 0.9f && playerY - myY <= 0.1f)
         {
             isClickedOn = true;
-            Player.instance.MoveToLocation(transform.position, takenFood, isShort);
+            Player.instance.MoveToLocation(transform.position, foodWaste);
         }
         else if (nowPos == 1 && playerx - myX <= -0.9f && playerY - myY <= 0.1f)
         {
             isClickedOn = true;
-            Player.instance.MoveToLocation(transform.position, takenFood, isShort);
+            Player.instance.MoveToLocation(transform.position, foodWaste);
         }
     }
 

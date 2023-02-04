@@ -9,6 +9,7 @@ public abstract class Node : MonoBehaviour
 
     [SerializeField] AudioClip clip;
     [SerializeField] int scoreToAdd;
+    [SerializeField] int foodWaste;
 
     public bool visited;
 
@@ -22,17 +23,18 @@ public abstract class Node : MonoBehaviour
         var dis = Vector3.Distance(transform.position, Player.instance.transform.position);
         if (!visited && dis <= 1.1f)
         {
-            OnClick(true);
+            OnClick(foodWaste);
         }
         else if(!visited && dis >= 1.2f && dis <= 1.6f)
         {
-            OnClick(false);
+            foodWaste++;
+            OnClick(foodWaste);
         }
     }
 
-    public virtual void OnClick(bool isShort)
+    public virtual void OnClick(int foodWaste)
     {
-        print(gameObject + "Clicked" + isShort);
+        print(gameObject + "ClickedOn" + foodWaste);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -42,8 +44,11 @@ public abstract class Node : MonoBehaviour
             if (!collision.GetComponent<Player>().isMoving)
             {
                 PlayerCollision();
-                Player.instance.source.PlayOneShot(clip);
                 visited = true;
+                if(clip != null)
+                {
+                    Player.instance.source.PlayOneShot(clip);
+                }
             }
         }
     }

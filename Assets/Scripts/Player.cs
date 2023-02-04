@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     public bool isMoving;
     public int score;
 
+    public Vector2 nowLoc, beforeLoc;
+
     private void Start()
     {
         if (Player.instance == null)
@@ -37,10 +39,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void MoveToLocation(Vector3 endLocation, int foodWaste, bool isShort)
+    public void MoveToLocation(Vector3 endLocation, int foodWaste)
     {
-        if (wholeFoodsEaten - spentFoods >= foodWaste && isShort)
+        if (wholeFoodsEaten - spentFoods >= foodWaste)
         {
+            beforeLoc = transform.position;
             isMoving = true;
             print("Player Move");
             transform.DOMove(endLocation, 1);
@@ -60,27 +63,6 @@ public class Player : MonoBehaviour
             StartCoroutine(ChangeIsMove());
             eventMove?.Invoke();
         }
-        else if (wholeFoodsEaten - spentFoods >= foodWaste + 1 && !isShort)
-        {
-            isMoving = true;
-            print("Player Move");
-            transform.DOMove(endLocation, 1);
-            if (!firstMove)
-            {
-                lineRenderer.positionCount += 2;
-                lineRenderer.SetPosition(moveNumb, transform.position);
-                firstMove = true;
-            }
-            else
-            {
-                lineRenderer.positionCount += 1;
-            }
-            lineRenderer.SetPosition(moveNumb + 1, endLocation);
-            moveNumb++;
-            spentFoods += foodWaste + 1;
-            StartCoroutine(ChangeIsMove());
-            eventMove?.Invoke();
-        }
         else
         {
             print("NO NO");
@@ -90,6 +72,24 @@ public class Player : MonoBehaviour
     public IEnumerator ChangeIsMove()
     {
         yield return new WaitForSeconds(1f);
+        nowLoc = transform.position;
+
+        if(nowLoc.y - beforeLoc.y >= 0.9f)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 90);
+        }
+        else if (nowLoc.y - beforeLoc.y <= -0.9f)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 270);
+        }
+        else if (nowLoc.x - beforeLoc.x <= -0.9f)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 180);
+        }
+        else if (nowLoc.x - beforeLoc.x >= 0.9f)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+        }
         isMoving = false;
     }
 

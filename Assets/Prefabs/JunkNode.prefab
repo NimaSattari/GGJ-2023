@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2898818496786717899, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
       propertyPath: m_Name
-      value: JunkNode Variant
+      value: JunkNode
       objectReference: {fileID: 0}
     - target: {fileID: 3404113028658246449, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
       propertyPath: m_Sprite
@@ -89,6 +89,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 847f4ea1aa9ec924d8d812e5f7610e94, type: 3}
   scoreToAdd: 20
+  foodWaste: 2
   visited: 0
   emptyNode: {fileID: 2898818496786717899, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
-  takenFood: 2

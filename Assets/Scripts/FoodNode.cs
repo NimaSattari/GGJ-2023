@@ -7,10 +7,10 @@ public class FoodNode : Node
     [SerializeField] GameObject emptyNode;
     [SerializeField] int givenFood;
 
-    public override void OnClick(bool isShort)
+    public override void OnClick(int foodWaste)
     {
-        base.OnClick(isShort);
-        Player.instance.MoveToLocation(transform.position, 1,isShort);
+        base.OnClick(foodWaste);
+        Player.instance.MoveToLocation(transform.position, foodWaste);
     }
 
     public override void PlayerCollision()
