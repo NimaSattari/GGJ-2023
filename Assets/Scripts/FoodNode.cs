@@ -5,7 +5,8 @@ using UnityEngine;
 public class FoodNode : Node
 {
     [SerializeField] GameObject emptyNode;
-    [SerializeField] int foodPlus;
+    [SerializeField] int givenFood;
+
     public override void OnClick(bool isShort)
     {
         base.OnClick(isShort);
@@ -15,7 +16,7 @@ public class FoodNode : Node
     public override void PlayerCollision()
     {
         base.PlayerCollision();
-        Player.instance.wholeFoodsEaten += foodPlus;
+        Player.instance.wholeFoodsEaten += givenFood;
         GameObject emptyInstant = Instantiate(emptyNode, transform.position, Quaternion.identity, transform.parent);
         emptyInstant.GetComponent<Node>().visited = true;
         Destroy(gameObject);

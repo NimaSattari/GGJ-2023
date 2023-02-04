@@ -70,11 +70,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1055905867488727915, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
---- !u!58 &3388661142870001956 stripped
-CircleCollider2D:
-  m_CorrespondingSourceObject: {fileID: 7998995421118281202, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
-  m_PrefabInstance: {fileID: 4613043569531600086}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7511580587540963357 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2898818496786717899, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
@@ -92,9 +87,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5372a63885eefdd4bb19250ad0ab0e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circle: {fileID: 3388661142870001956}
-  visited: 0
-  scoreToAdd: 10
   clip: {fileID: 0}
+  scoreToAdd: 10
+  visited: 0
   emptyNode: {fileID: 2898818496786717899, guid: 63677bdf296e4ab4cb3d4471d170c2be, type: 3}
-  foodPlus: 3
+  givenFood: 3

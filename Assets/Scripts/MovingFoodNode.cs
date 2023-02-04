@@ -10,11 +10,10 @@ public class MovingFoodNode : Node
     [SerializeField] int nowPos;
     [SerializeField] bool goFromStart = true;
     [SerializeField] bool isClickedOn = false;
-    [SerializeField] int foodPlus;
+    [SerializeField] int givenFood;
 
     public override void OnClick(bool isShort)
     {
-        print("OnClick");
         base.OnClick(isShort);
         isClickedOn = true;
         Player.instance.MoveToLocation(transform.position, 1, isShort);
@@ -23,7 +22,7 @@ public class MovingFoodNode : Node
     public override void PlayerCollision()
     {
         base.PlayerCollision();
-        Player.instance.wholeFoodsEaten += foodPlus;
+        Player.instance.wholeFoodsEaten += givenFood;
         GameObject emptyInstant = Instantiate(emptyNode, transform.position, Quaternion.identity, transform.parent);
         emptyInstant.GetComponent<Node>().visited = true;
         Destroy(gameObject);
@@ -31,7 +30,6 @@ public class MovingFoodNode : Node
 
     public override void OnPlayerMoved()
     {
-        print("OnMove");
         base.OnPlayerMoved();
         StartCoroutine("enumerator");
     }

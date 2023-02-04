@@ -5,10 +5,17 @@ using UnityEngine;
 
 public abstract class Node : MonoBehaviour
 {
-    [SerializeField] CircleCollider2D circle;
-    public bool visited;
-    public int scoreToAdd;
+    private Collider2D mycollider;
+
     [SerializeField] AudioClip clip;
+    [SerializeField] int scoreToAdd;
+
+    public bool visited;
+
+    private void Start()
+    {
+        mycollider = GetComponent<Collider2D>();
+    }
 
     private void OnMouseDown()
     {
@@ -25,27 +32,27 @@ public abstract class Node : MonoBehaviour
 
     public virtual void OnClick(bool isShort)
     {
-
+        print(gameObject + "Clicked" + isShort);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "Player" && !visited)
         {
-            print("Colided");
             if (!collision.GetComponent<Player>().isMoving)
             {
                 PlayerCollision();
-                visited = true;
                 Player.instance.source.PlayOneShot(clip);
+                visited = true;
             }
         }
     }
 
     public virtual void PlayerCollision()
     {
-        circle.enabled = false;
+        mycollider.enabled = false;
         Player.instance.score += scoreToAdd;
+        print(gameObject + "Collided With Player");
     }
 
     private void OnEnable()

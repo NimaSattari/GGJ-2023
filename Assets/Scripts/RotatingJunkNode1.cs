@@ -9,34 +9,38 @@ public class RotatingJunkNode1 : Node
     [SerializeField] int nowPos;
     [SerializeField] bool isClickedOn = false;
     [SerializeField] GameObject rotatingObject;
+    [SerializeField] int takenFood;
 
     public override void OnClick(bool isShort)
     {
         print("OnClick");
         base.OnClick(isShort);
-        if ((nowPos == 0 && Player.instance.transform.position.y - transform.position.y >= 0.9f && Player.instance.transform.position.x - transform.position.x <= 0.1f) ||
-            (nowPos == 0 && Player.instance.transform.position.y - transform.position.y <= -0.9f && Player.instance.transform.position.x - transform.position.x <= 0.1f))
+        float playerY = Player.instance.transform.position.y, playerx = Player.instance.transform.position.x;
+        float myX = transform.position.x, myY = transform.position.y;
+
+        if ((nowPos == 0 && playerY - myY >= 0.9f && playerx - myX <= 0.1f) ||
+            (nowPos == 0 && playerY - myY <= -0.9f && playerx - myX <= 0.1f))
         {
             isClickedOn = true;
-            Player.instance.MoveToLocation(transform.position, 2, isShort);
+            Player.instance.MoveToLocation(transform.position, takenFood, isShort);
         }
-        if ((nowPos == 2 && Player.instance.transform.position.y - transform.position.y >= 0.9f && Player.instance.transform.position.x - transform.position.x <= 0.1f) ||
-            (nowPos == 2 && Player.instance.transform.position.y - transform.position.y <= -0.9f && Player.instance.transform.position.x - transform.position.x <= 0.1f))
+        else if ((nowPos == 2 && playerY - myY >= 0.9f && playerx - myX <= 0.1f) ||
+            (nowPos == 2 && playerY - myY <= -0.9f && playerx - myX <= 0.1f))
         {
             isClickedOn = true;
-            Player.instance.MoveToLocation(transform.position, 2, isShort);
+            Player.instance.MoveToLocation(transform.position, takenFood, isShort);
         }
-        if ((nowPos == 2 && Player.instance.transform.position.x - transform.position.x >= 0.9f && Player.instance.transform.position.y - transform.position.y <= 0.1f) ||
-            (nowPos == 2 && Player.instance.transform.position.x - transform.position.x <= -0.9f && Player.instance.transform.position.y - transform.position.y <= 0.1f))
+        else if ((nowPos == 1 && playerx - myX >= 0.9f && playerY - myY <= 0.1f) ||
+            (nowPos == 1 && playerx - myX <= -0.9f && playerY - myY <= 0.1f))
         {
             isClickedOn = true;
-            Player.instance.MoveToLocation(transform.position, 2, isShort);
+            Player.instance.MoveToLocation(transform.position, takenFood, isShort);
         }
-        if ((nowPos == 2 && Player.instance.transform.position.x - transform.position.x >= 0.9f && Player.instance.transform.position.y - transform.position.y <= 0.1f) ||
-            (nowPos == 2 && Player.instance.transform.position.x - transform.position.x <= -0.9f && Player.instance.transform.position.y - transform.position.y <= 0.1f))
+        else if ((nowPos == 3 && playerx - myX >= 0.9f && playerY - myY <= 0.1f) ||
+            (nowPos == 3 && playerx - myX <= -0.9f && playerY - myY <= 0.1f))
         {
             isClickedOn = true;
-            Player.instance.MoveToLocation(transform.position, 2, isShort);
+            Player.instance.MoveToLocation(transform.position, takenFood, isShort);
         }
     }
 
