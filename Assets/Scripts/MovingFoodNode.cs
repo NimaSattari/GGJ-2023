@@ -43,22 +43,25 @@ public class MovingFoodNode : Node
     }
     public void NextPath()
     {
-        if (goFromStart)
+        if (posesToVisit.Length != 0)
         {
-            transform.DOMove(posesToVisit[nowPos + 1].position, 0.25f);
-            nowPos++;
-            if (nowPos == posesToVisit.Length - 1)
+            if (goFromStart)
             {
-                goFromStart = false;
+                transform.DOMove(posesToVisit[nowPos + 1].position, 0.25f);
+                nowPos++;
+                if (nowPos == posesToVisit.Length - 1)
+                {
+                    goFromStart = false;
+                }
             }
-        }
-        else
-        {
-            transform.DOMove(posesToVisit[nowPos - 1].position, 0.25f);
-            nowPos--;
-            if (nowPos == 0)
+            else
             {
-                goFromStart = true;
+                transform.DOMove(posesToVisit[nowPos - 1].position, 0.25f);
+                nowPos--;
+                if (nowPos == 0)
+                {
+                    goFromStart = true;
+                }
             }
         }
     }

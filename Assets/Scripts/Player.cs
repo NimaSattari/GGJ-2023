@@ -18,8 +18,6 @@ public class Player : MonoBehaviour
     public bool isMoving;
     public int score;
 
-    public Vector2 nowLoc, beforeLoc;
-
     private void Start()
     {
         if (Player.instance == null)
@@ -43,7 +41,6 @@ public class Player : MonoBehaviour
     {
         if (wholeFoodsEaten - spentFoods >= foodWaste)
         {
-            beforeLoc = transform.position;
             isMoving = true;
             print("Player Move");
             transform.DOMove(endLocation, 1);
@@ -62,6 +59,7 @@ public class Player : MonoBehaviour
             spentFoods += foodWaste;
             StartCoroutine(ChangeIsMove());
             eventMove?.Invoke();
+            ChangeRotation(endLocation);
         }
         else
         {
@@ -72,25 +70,27 @@ public class Player : MonoBehaviour
     public IEnumerator ChangeIsMove()
     {
         yield return new WaitForSeconds(1f);
-        nowLoc = transform.position;
+        isMoving = false;
+    }
 
-        if(nowLoc.y - beforeLoc.y >= 0.9f)
+    private void ChangeRotation(Vector3 nowLoc)
+    {
+        if (nowLoc.y - transform.position.y >= 0.9f)
         {
             transform.eulerAngles = new Vector3(0, 0, 90);
         }
-        else if (nowLoc.y - beforeLoc.y <= -0.9f)
+        else if (nowLoc.y - transform.position.y <= -0.9f)
         {
             transform.eulerAngles = new Vector3(0, 0, 270);
         }
-        else if (nowLoc.x - beforeLoc.x <= -0.9f)
+        else if (nowLoc.x - transform.position.x <= -0.9f)
         {
             transform.eulerAngles = new Vector3(0, 0, 180);
         }
-        else if (nowLoc.x - beforeLoc.x >= 0.9f)
+        else if (nowLoc.x - transform.position.x >= 0.9f)
         {
             transform.eulerAngles = new Vector3(0, 0, 0);
         }
-        isMoving = false;
     }
 
     public void Win()
